@@ -6,10 +6,12 @@ I'll try to keep a devlog in each individual repo (at the very least put comment
 
 And at the end of each project I'll write a reflection about what I learned, what I'm most proud of, what I struggled the most with, and what AI suggests I should've done different
 
-**Note: I disabled copilot inline completions and will refrain from using AI to generate code or explain step by step what I must do**
-  - On top of this I will be including urls to share the chat's I have with AI about why something isn't working or not
-  - However I can't share every instance of running into AI as google has their own AI that I will use whenever looking up a topic
-
+## Limiting my resources
+- **Note: I disabled copilot inline completions and will refrain from using AI to generate code or explain step by step what I must do**
+- On top of this I will be including urls to share the chats I have with AI about why something isn't working or not
+- However I can't share every instance of running into AI as google has their own AI that I will use whenever looking up a topic
+- My editor is NeoVim preconfigured with LazyVim, so I do have access to the Lazy Extra of lang.go
+  - This gives me access to some snippets, go's LSP, linting, and automatic go formatting whenver I save a file
 
 ## Projects to Complete
 
