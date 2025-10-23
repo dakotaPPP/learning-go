@@ -26,7 +26,7 @@
 
 ## 10-22-2025 commit a1071360aee189fdbdfa2ef0a597b7057b429784
 
-- Realized there's a big error in my readFile() function
+- Realized there's a big error in my `readFile()` function
   - I thought it was reading the entire file but it's more a read stream system with a buffer
   - Left comments explaining this
 - Also added more test files which exposes gaps in my current wc implementation
