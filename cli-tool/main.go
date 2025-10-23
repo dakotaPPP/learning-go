@@ -10,17 +10,19 @@ import (
 	"fmt"
 	"log"
 	"os"
+
+	"example.com/counter"
 )
 
 func main() {
-	numLines := -1
-	numWords := -1
 	fileName := "file.txt"
-	numBytes, _, err := readFile(fileName)
+	numBytes, fileContents, err := readFile(fileName)
 	if err != nil {
 		panic(err)
 	}
 
+	var numLines, numWords int
+	numLines, numWords = counter.GetLineAndWordCount(fileContents)
 	fmt.Printf("%d %d %d %s\n", numLines, numWords, numBytes, fileName)
 }
 
