@@ -1,0 +1,3 @@
+- Created while following along with [this video](https://youtu.be/q-GZ71nRe0o?si=BkQj_ds5MUO7yZFs) created by John McBride
+- After this video I also wanted knowledge on the loop syntax so I watched [Go (Golang) Tutorial #7 - Loops](https://youtu.be/CL13xV2dHCg?si=fO5jdDiBuWyeWECk) by Net Ninja
+- With the basic ideas and syntax understood I felt comfortable moving on to the first project in my list
