@@ -2,8 +2,8 @@
 package counter
 
 func GetLineAndWordCount(inputBytes []byte) (int, int) {
-	lineCount := 0
-	wordCount := 1
+	lineCount := 1
+	wordCount := 0
 	for i := range inputBytes {
 		switch inputBytes[i] {
 		case '\n':

@@ -16,15 +16,23 @@ import (
 )
 
 func main() {
-	fileName := "test-inputs/empty-test.txt"
-	numBytes, fileContents, err := readFile(fileName)
-	if err != nil {
-		panic(err)
-	}
+	fileNames := []string{"all-space.txt", "empty-test.txt", "normal-test.txt", "too-many-spaces.txt"}
 
-	var numLines, numWords int
-	numLines, numWords = counter.GetLineAndWordCount(fileContents)
-	fmt.Printf("%d %d %d %s\n", numLines, numWords, numBytes, fileName)
+	for _, fileName := range fileNames {
+		fileName = "test-inputs/" + fileName
+		numBytes, fileContents, err := readFile(fileName)
+
+		var numLines, numWords int
+		if err == io.EOF {
+			numLines, numWords, numBytes = 0, 0, 0
+			fmt.Printf("%d %d %d %s\n", numLines, numWords, numBytes, fileName)
+			continue
+		} else if err != nil {
+			panic(err)
+		}
+		numLines, numWords = counter.GetLineAndWordCount(fileContents)
+		fmt.Printf("%d %d %d %s\n", numLines, numWords, numBytes, fileName)
+	}
 }
 
 func readFile(fileName string) (int, []byte, error) {
@@ -36,10 +44,15 @@ func readFile(fileName string) (int, []byte, error) {
 	}
 
 	count, err := file.Read(data)
-	if err != nil && err != io.EOF {
+
+	if err == io.EOF {
+		return -1, data, err
+	} else if err != nil {
 		log.Fatal(err)
 		return -1, data, err
 	}
+
+	file.Close()
 	// I pressume the :count in data is acting as the null terminator point in the files input
 	// fmt.Printf("read %d bytes: %q\n", count, data[:count])
 	// fmt.Printf("read %d bytes: %v\n", count, data[:count+1])
@@ -50,5 +63,10 @@ func readFile(fileName string) (int, []byte, error) {
 	// so numBytes part of the output is captured for us already in count
 	// for calculating the numLines and numWords I'm thinking go through the data slice and increment a counter-
 	// whenever we run into a space ascii character or a \n ascii character
+
+	// THERES A BIG MISCONCEPTION I HAD ABOUT READING THE FILE
+	// I pressumed the slice would automatically grow in size, which it doesn't
+	// So this readFile more so acts as a read buffer that needs to loop till the EOF is reached
+	// meaning our current setup for detecting empty files is slighty off but it's not lost
 	return count, data, nil
 }
