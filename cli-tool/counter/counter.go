@@ -1,18 +1,27 @@
 // Package counter holds my function for counting the number of lines and words
 package counter
 
-func GetLineAndWordCount(inputBytes []byte) (int, int) {
+func GetLineAndWordCount(inputBytes []byte, isInAWord bool) (int, int, bool) {
 	lineCount := 0
 	wordCount := 0
+
 	for i := range inputBytes {
 		switch inputBytes[i] {
 		case '\n':
 			lineCount++
+			isInAWord = false
 		case ' ':
-			// know this logic isn't quite right will return to it later
-			wordCount++
+			isInAWord = false
+		// when end of file is reached break out of for loop as no more counting is needed
+		case '\x00':
+			break
+		default:
+			if !isInAWord {
+				wordCount++
+			}
+			isInAWord = true
 		}
 	}
 
-	return lineCount, wordCount
+	return lineCount, wordCount, isInAWord
 }

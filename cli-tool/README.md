@@ -63,3 +63,22 @@ Resources I've used:
   - Meaning the only thing left for me to get right is the word count output then I need to worry about wildcards and directory scanning
 - Added test cases for when input file is some multiple of the file buffer to see if an unexpected error would occur
   - This test case passed, no change was need to fix
+
+## 3:25 PM 10-23-2025 All outputs are correct!
+
+- Redesigned my algorithm for counting words
+  - First came up with track if the space is continous if so don't add to word count
+  - Then came up with keeping track of if I was inside a word
+    - Ended up being my solution that worked
+    - Noticed that my word count numbers were a bit inflated
+      - presummed it's likely due to the count word function losing context of if it was in a word before the previous execution
+      - To fix this I added in passing in and outputting the context of if the buffer is still in a word or not
+    - Noticed the word count was still slightly larger than expected
+      - after printf debugging in `counter.go` I noticed that the null bytes of data in my `inputBytes` slice was triggering my default switch statement case
+      - To fix this I added the case `'\00'` which would break out of the for loop and return the final count of accumulated values
+
+### Next step
+
+- Taking in file input parameter
+  - will begin slow with just taking in a single cli argument with no wild cards
+  - Then will begin working on taking in wildcard inputs

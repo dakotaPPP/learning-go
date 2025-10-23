@@ -23,6 +23,7 @@ func check(e error) {
 
 func main() {
 	fileNames := []string{"all-space.txt", "empty-test.txt", "normal-test.txt", "mid-size.txt", "too-many-spaces.txt", "buffer-size.txt", "buffer-size-2x.txt"}
+	// fileNames := []string{"all-space.txt"}
 	slices.Sort(fileNames)
 
 	for _, fileName := range fileNames {
@@ -38,6 +39,7 @@ func getWCData(fileName string) (int, int, int, string, error) {
 	var numLines, numWords, numBytes int
 	var offset int64
 
+	var isInAWordTemp bool
 	for {
 		bytesRead, fileContents, err := file.ReadBuffer(fileName, offset)
 
@@ -47,7 +49,9 @@ func getWCData(fileName string) (int, int, int, string, error) {
 
 		check(err)
 
-		bufferNumLines, bufferNumWords := counter.GetLineAndWordCount(fileContents)
+		var bufferNumLines, bufferNumWords int
+
+		bufferNumLines, bufferNumWords, isInAWordTemp = counter.GetLineAndWordCount(fileContents, isInAWordTemp)
 
 		numLines += bufferNumLines
 		numWords += bufferNumWords
