@@ -8,6 +8,7 @@ package main
 // numBytes and fileName
 import (
 	"fmt"
+	"io"
 	"log"
 	"os"
 
@@ -15,7 +16,7 @@ import (
 )
 
 func main() {
-	fileName := "file.txt"
+	fileName := "test-inputs/empty-test.txt"
 	numBytes, fileContents, err := readFile(fileName)
 	if err != nil {
 		panic(err)
@@ -29,14 +30,13 @@ func main() {
 func readFile(fileName string) (int, []byte, error) {
 	file, err := os.Open(fileName)
 	data := make([]byte, 64)
-
 	if err != nil {
 		log.Fatal(err)
 		return -1, data, err
 	}
 
 	count, err := file.Read(data)
-	if err != nil {
+	if err != nil && err != io.EOF {
 		log.Fatal(err)
 		return -1, data, err
 	}
