@@ -9,6 +9,7 @@ package main
 import (
 	"fmt"
 	"io"
+	"slices"
 
 	"example.com/counter"
 	"example.com/file"
@@ -21,7 +22,8 @@ func check(e error) {
 }
 
 func main() {
-	fileNames := []string{"all-space.txt", "empty-test.txt", "normal-test.txt", "too-many-spaces.txt"}
+	fileNames := []string{"all-space.txt", "empty-test.txt", "normal-test.txt", "mid-size.txt", "too-many-spaces.txt", "buffer-size.txt", "buffer-size-2x.txt"}
+	slices.Sort(fileNames)
 
 	for _, fileName := range fileNames {
 		fileName = "test-inputs/" + fileName
@@ -54,7 +56,7 @@ func getWCData(fileName string) (int, int, int, string, error) {
 		if bytesRead != file.BufferSize {
 			break
 		}
-		offset += file.BufferSize + 1
+		offset += file.BufferSize
 	}
 
 	return numLines, numWords, numBytes, fileName, nil

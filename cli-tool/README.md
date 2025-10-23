@@ -54,3 +54,12 @@ Resources I've used:
   misspelled it haha)
 - gemini for help with weird case of no new left assigned variables?
 - [gemini chat](https://gemini.google.com/share/113cd9851676)
+
+## 2:40 PM 10-23-2025
+
+- Used [https://gobyexample.com/sorting](https://gobyexample.com/sorting) to learn how to sort my file input
+- Misunderstood setting up the offset value (was doing a off by one error)
+  - This fix gives me the correct bytes output for each file now
+  - Meaning the only thing left for me to get right is the word count output then I need to worry about wildcards and directory scanning
+- Added test cases for when input file is some multiple of the file buffer to see if an unexpected error would occur
+  - This test case passed, no change was need to fix
