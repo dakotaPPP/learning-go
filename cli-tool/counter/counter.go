@@ -2,7 +2,7 @@
 package counter
 
 func GetLineAndWordCount(inputBytes []byte) (int, int) {
-	lineCount := 1
+	lineCount := 0
 	wordCount := 0
 	for i := range inputBytes {
 		switch inputBytes[i] {
