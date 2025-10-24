@@ -64,7 +64,7 @@ Resources I've used:
 - Added test cases for when input file is some multiple of the file buffer to see if an unexpected error would occur
   - This test case passed, no change was need to fix
 
-## 3:25 PM 10-23-2025 All outputs are correct!
+## 3:25 PM 10-23-2025 All outputs are correct
 
 - Redesigned my algorithm for counting words
   - First came up with track if the space is continous if so don't add to word count
@@ -82,3 +82,30 @@ Resources I've used:
 - Taking in file input parameter
   - will begin slow with just taking in a single cli argument with no wild cards
   - Then will begin working on taking in wildcard inputs
+
+## 9:40 PM 10-23-2025
+
+- Began wanting to use structs for my output of each wc entry for easier type completion
+  - Made the code a bit more verbose but feels like good practice of getting the concept in
+  - Then I wanted to add together all the results to get the total line that wc outputs when multiple files are inputBytes
+  - I looked up if overloading operators was possible by default and found out it wasn't
+    - Google ai then gave me this code that I based my add function off of
+
+    ```go
+    type Vector struct {
+      X, Y float64
+    }
+
+    // Add method for Vector type
+    func (v Vector) Add(other Vector) Vector {
+      return Vector{v.X + other.X, v.Y + other.Y}
+    }
+
+    func main() {
+      v1 := Vector{1, 2}
+      v2 := Vector{3, 4}
+
+      v3 := v1.Add(v2) // Using the custom Add method
+      fmt.Println(v3)  // Output: {4 6}
+    }
+    ```
