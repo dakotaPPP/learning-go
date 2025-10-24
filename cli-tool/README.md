@@ -116,3 +116,42 @@ Resources I've used:
 - Added width to printf of `PrintWCEntry()` method
 - Began working on taking in cli-arguments
   - used [https://gobyexample.com/command-line-arguments](https://gobyexample.com/command-line-arguments)
+  - Spent a long time coming up with an overly complex way of taking in wildcards as input
+    - The remnants of my first attempt are here
+
+    ```go
+    func GetFiles(dir string) []string {
+      var filePaths []string
+      err := filepath.WalkDir(dir, func(path string, dir fs.DirEntry, err error) error {
+        // prevent panic by handling failure accessing a path
+        if err != nil {
+          return err
+        }
+
+        // skipping a dir without errors
+        if dir.IsDir() {
+          fmt.Println("skipping dir")
+          return filepath.SkipDir
+        }
+
+        fmt.Println("adding path")
+        filePaths = append(filePaths, path)
+        return nil
+      })
+
+      check(err)
+
+      return filePaths
+    }
+    ```
+
+    - I got all this code by following the two resources below:
+      - [https://pkg.go.dev/path/filepath#example-Walk](https://pkg.go.dev/path/filepath#example-Walk)
+      - [Practical Go Lessons](https://www.practical-go-lessons.com/post/how-to-iterate-recursively-over-a-directory-with-go-cbtnckus1nms70u165jg)
+
+  - Then I started on down the path of `filepath.Glob()` which was quite promising
+    - Till I tried running with the cli argument \* and got the error I setup for when users insert too many arguments
+    - After inspecting the arguments being parsed that's when I realized the following
+  - Turns out the terminal automatically converts wildcards into cli argument ready format
+  - Next step will be not exiting everytime we run into a directory
+    - instead should just let user know it's a directory and continue on
