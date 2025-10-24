@@ -109,3 +109,10 @@ Resources I've used:
       fmt.Println(v3)  // Output: {4 6}
     }
     ```
+
+## 10:30 PM 10-23-2025
+
+- Refactored out all the core logic of my wc implementation to it's own package
+- Added width to printf of `PrintWCEntry()` method
+- Began working on taking in cli-arguments
+  - used [https://gobyexample.com/command-line-arguments](https://gobyexample.com/command-line-arguments)
