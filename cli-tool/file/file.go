@@ -49,3 +49,34 @@ func ReadBuffer(fileName string, offset int64) (int, []byte, error) {
 	// meaning our current setup for detecting empty files is slighty off but it's not lost
 	return count, data, nil
 }
+
+// func GetFiles(dir string) []string {
+// 	var filePaths []string
+// 	err := filepath.WalkDir(dir, func(path string, dir fs.DirEntry, err error) error {
+// 		// prevent panic by handling failure accessing a path
+// 		if err != nil {
+// 			return err
+// 		}
+//
+// 		// skipping a dir without errors
+// 		if dir.IsDir() {
+// 			fmt.Println("skipping dir")
+// 			return filepath.SkipDir
+// 		}
+//
+// 		fmt.Println("adding path")
+// 		filePaths = append(filePaths, path)
+// 		return nil
+// 	})
+//
+// 	check(err)
+//
+// 	return filePaths
+// }
+//
+// func main() {
+// 	fileNames := GetFiles("/home/dakota/coding/learning-go/")
+// 	for _, file := range fileNames {
+// 		fmt.Printf("%s\n", file)
+// 	}
+// }
