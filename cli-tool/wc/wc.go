@@ -34,8 +34,14 @@ func check(e error) {
 	}
 }
 
-func GetWCData(fileName string) (WcEntry, error) {
+func GetWCData(fileName string) (WcEntry, bool) {
 	entry := WcEntry{FileName: fileName}
+	isDir := false
+
+	if file.CheckIfDir(fileName) {
+		isDir = true
+		return entry, isDir
+	}
 
 	var offset int64
 	var isInAWordTemp bool
@@ -63,5 +69,5 @@ func GetWCData(fileName string) (WcEntry, error) {
 		offset += file.BufferSize
 	}
 
-	return entry, nil
+	return entry, isDir
 }

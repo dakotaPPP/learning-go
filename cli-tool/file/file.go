@@ -14,6 +14,13 @@ func check(e error) {
 	}
 }
 
+func CheckIfDir(fileName string) bool {
+	result, err := os.Stat(fileName)
+	check(err)
+
+	return result.IsDir()
+}
+
 func ReadBuffer(fileName string, offset int64) (int, []byte, error) {
 	file, err := os.Open(fileName)
 	check(err)

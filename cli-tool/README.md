@@ -158,3 +158,15 @@ Resources I've used:
 - Turns out the terminal automatically converts wildcards into cli argument ready format
 - Next step will be not exiting everytime we run into a directory
   - instead should just let user know it's a directory and continue on
+
+## 8:30 PM 10-23-2025 - **PROJECT COMPLETE**
+
+- Finally got skipping directories working
+- First thought it was problem with the `os.Open()` but then learned it came from the `file.Read()`
+- Wanted to fix the problem from the bottom by having `ReadBuffer()` raise an error
+  - But realized this would over complicate my current code flow
+  - So instead opted to just check if the file name passed in is a directory or not
+    - Then I would exit the loop early (which saves on unnecessarily reading the buffer of a directory)
+  - Then passed the info of if the file is a directory or not to the main.go file
+  - This ended up working best and I copied wc's log statement for letting the user know the input is a directory
+- I'm now marking this project as complete and will begin the reflection document

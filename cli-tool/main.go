@@ -1,16 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"os"
 
 	"example.com/wc"
 )
-
-func check(e error) {
-	if e != nil {
-		panic(e)
-	}
-}
 
 func main() {
 	// [1:] is just so we don't grab the program path
@@ -19,10 +14,14 @@ func main() {
 	totalOfAllEntries := wc.WcEntry{FileName: "total"}
 
 	for _, fileName := range fileNames {
-		entry, err := wc.GetWCData(fileName)
-		check(err)
+		entry, isDirectory := wc.GetWCData(fileName)
+
 		wc.PrintWCEntry(entry)
-		totalOfAllEntries = totalOfAllEntries.Add(entry)
+		if !isDirectory {
+			totalOfAllEntries = totalOfAllEntries.Add(entry)
+		} else {
+			fmt.Printf("wc: %s: Is a directory\n", fileName)
+		}
 	}
 
 	if len(fileNames) > 1 {
